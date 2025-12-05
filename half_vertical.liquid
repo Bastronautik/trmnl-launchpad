@@ -1,0 +1,70 @@
+{% if has_launch %}
+<div class="layout layout--col layout--top gap--xsmall" id="launchpadApp">
+
+  <div class="flex flex--col flex--y-end w--full value--xxsmall border--h-5 pb--2 mb--2">
+    <div class="flex w--full">
+      <div class="outline text--black py--1 px--2 rounded--xsmall">
+        {{ launch_status }}
+      </div>
+      <div class="bg--black text--white py--1 px--2 rounded--xsmall no-shrink">{{ countdown_label }}</div>
+    </div>
+    <div class="no-shrink font--normal flex gap flex--center-y value--xxsmall w--full">
+      <i class="hgi hgi-stroke hgi-time-01 value--small"></i> 
+      <div class="mt--1">{{ launch_date }} - {{ launch_time_display }}</div>
+    </div>
+  </div>
+
+  <div class="w--full">
+    <div data-value-fit="true" class="stretch title--overflow value--xsmall font--bold">{{ launch_name }} </div>
+    <div class="mt--2 value--xxsmall">By {{ provider_name}}</div>
+  </div>
+
+  <div class="value--xxsmall mt--1 font--normal body-text w--full text--gray-30">
+    {{ mission_description | truncate: 180 }}
+  </div>
+
+  <div class="col--span-2 flex flex--col h--full gap--xsmall">
+
+    <div class="grid grid--cols-2 gap--xsmall h--full">
+
+      <div class="bg--black text--white rounded p--2 relative value--xxsmall w-full flex flex--col flex--left flex--end gap--xsmall">
+        <div class="absolute">
+          <i class="hgi hgi-stroke hgi-rocket value--small"></i> 
+        </div>
+        <div class="label--small">Rocket</div>
+        {{ rocket_name | truncate: 50 }}
+      </div>
+
+      <div class="bg--black text--white rounded p--2 relative value--xxsmall w-full flex flex--col flex--left flex--end gap--xsmall">
+        <div class="absolute">
+          <i class="hgi hgi-stroke hgi-rocket-02 value--small"></i> 
+        </div>
+        <div class="label--small">Launchpad</div>
+        {{ pad_name | truncate: 50 }}
+      </div>
+
+    </div>
+    <div class="grid grid--cols-2 h--full gap--xsmall">
+
+      <div class="bg--black text--white rounded p--2 relative value--xxsmall w-full flex flex--col flex--left flex--end gap--xsmall">
+        <div class="absolute">
+          <i class="hgi hgi-stroke hgi-saturn-02 value--small"></i> 
+        </div>
+        <div class="label--small">Destination</div>
+        {{ mission_orbit }}
+      </div>
+
+      <div class="bg--black text--white rounded p--2 relative value--xxsmall w-full flex flex--col flex--left flex--end gap--xsmall">
+        <div class="absolute">
+          <i class="hgi hgi-stroke hgi-location-06 value--small"></i> 
+        </div>
+        <div class="label--small">Location</div>
+        <div data-value-fit="true">{{ location_name | truncate: 45 }}</div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{% endif %}

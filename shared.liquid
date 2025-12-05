@@ -1,0 +1,67 @@
+<style>
+  #launchpadApp { font-family: 'Host Grotesk', sans-serif; }
+  .font--bold { font-weight: 600; }
+  .font--normal { font-weight: 400; }
+  .relative { position: relative; }
+  .border { outline: 1px solid #000 }
+  .absolute { position: absolute; display: block; top: 10px; right: 10px; }
+  .relative { position: relative; }
+  .body-text { line-height: 160%; }
+  .absolute-image { position: absolute; top: 0; left: 0; }
+  .title--overflow { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .outline { outline: 1px solid black; }
+</style>
+
+<link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+
+{% assign launch_data = results %}
+{% if results != "" %}
+  {% assign launch = results | sample %}
+  {% assign has_launch = true %}
+  
+  {% comment %} Extract launch details {% endcomment %}
+  {% assign launch_name = launch.name %}
+  {% assign launch_net = launch.net %}
+  {% assign launch_status = launch.status.name %}
+  {% assign launch_status_abbrev = launch.status.abbrev %}
+  {% assign provider_name = launch.launch_service_provider.name %}
+  {% assign rocket_name = launch.rocket.configuration.name %}
+  {% assign mission_name = launch.mission.name %}
+  {% assign mission_description = launch.mission.description %}
+  {% assign mission_type = launch.mission.type %}
+  {% assign mission_orbit = launch.mission.orbit.name %}
+  {% assign pad_name = launch.pad.name %}
+  {% assign location_name = launch.pad.location.name %}
+  {% assign launch_image = launch.image %}
+  
+  {% comment %} Calculate countdown {% endcomment %}
+  {% assign launch_time = launch_net | date: "%s" %}
+  {% assign current_time = "now" | date: "%s" %}
+  {% assign time_diff = launch_time | minus: current_time %}
+  
+  {% if time_diff > 0 %}
+    {% assign days = time_diff | divided_by: 86400 %}
+    {% assign remaining = time_diff | modulo: 86400 %}
+    {% assign hours = remaining | divided_by: 3600 %}
+    {% assign remaining = remaining | modulo: 3600 %}
+    {% assign minutes = remaining | divided_by: 60 %}
+    
+    {% comment %} Format countdown string {% endcomment %}
+    {% if days > 0 %}
+      {% assign countdown = days | append: "d " | append: hours | append: "h" %}
+    {% elsif hours > 0 %}
+      {% assign countdown = hours | append: "h " | append: minutes | append: "m" %}
+    {% else %}
+      {% assign countdown = minutes | append: " minutes" %}
+    {% endif %}
+    
+    {% assign countdown_label = "T-" | append: countdown %}
+  {% else %}
+    {% assign countdown_label = "Launching soon" %}
+  {% endif %}
+  
+  {% comment %} Format launch date for display {% endcomment %}
+  {% assign launch_date = launch_net | date: "%b %d, %Y" %}
+  {% assign launch_time_display = launch_net | date: "%H:%M UTC" %}
+{% endif %}
+

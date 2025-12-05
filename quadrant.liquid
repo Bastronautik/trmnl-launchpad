@@ -1,0 +1,40 @@
+{% if has_launch %}
+<div class="layout layout--col layout--top gap--xsmall" id="launchpadApp">
+
+  <div class="flex flex--col flex--y-end w--full value--xxsmall">
+    <div class="flex w--full">
+      <div class="outline text--black py--1 px--2 rounded--xsmall">
+        {{ launch_status }}
+      </div>
+      <div class="bg--black text--white py--1 px--2 rounded--xsmall no-shrink">{{ countdown_label }}</div>
+    </div>
+    <div class="no-shrink font--normal flex gap flex--center-y value--xxsmall w--full">
+      <i class="hgi hgi-stroke hgi-time-01 value--small"></i> 
+      <div class="mt--1">{{ launch_date }} - {{ launch_time_display }}</div>
+    </div>
+  </div>
+
+  <div class="w--full">
+    <div data-value-fit="true" class="stretch title--overflow value--xsmall font--bold">{{ launch_name }} </div>
+    <div class="mt--1 label--small">By {{ provider_name}}</div>
+  </div>
+  
+<div class="grid grid--cols-2 gap--xsmall bg--black text--white p--2 px--3 mt--1 rounded--small">
+    <div class="label--small  flex flex--center-y">
+      <i class="hgi hgi-stroke hgi-rocket value--xsmall"></i> {{ rocket_name | truncate: 33 }}
+    </div>
+
+    <div class="label--small flex flex--center-y">
+      <i class="hgi hgi-stroke hgi-rocket-02 value--xsmall"></i> {{ pad_name | truncate: 33 }}
+    </div>
+
+    <div class="label--small  flex flex--center-y">
+      <i class="hgi hgi-stroke hgi-maps-location-01 value--xsmall"></i> {{ location_name | truncate: 33 }}
+    </div>
+
+    <div class="label--small  flex flex--center-y">
+      <i class="hgi hgi-stroke hgi-saturn-02 value--xsmall"></i> {{ mission_orbit | truncate: 33 }}
+    </div>
+  </div>
+</div>
+{% endif %}
